@@ -1,0 +1,21 @@
+{
+  "name": "ast-example-javascript",
+  "version": "1.0.0",
+  "description": "Abstract Syntax Tree",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Abstract",
+    "Syntax",
+    "Tree"
+  ],
+  "author": "Harmeet",
+  "license": "ISC",
+  "devDependencies": {
+    "acorn": "^8.12.1",
+    "acorn-walk": "^8.3.4",
+    "escodegen": "^2.1.0"
+  }
+}
