@@ -3,8 +3,8 @@ const walk = require('acorn-walk');
 const escodegen = require('escodegen');
 
 const originalCode = `
-function greet(name) {
-    console.log("Hello, " + name + "!");
+async function greet(name) {
+    await console.log("Hello, " + name + "!");
 }
 greet("World");
 `;
@@ -23,5 +23,7 @@ walk.simple(ast, {
 });
 
 const instrumentedCode = escodegen.generate(ast);
+
+console.log(JSON.stringify(ast));
 
 console.log(instrumentedCode);
