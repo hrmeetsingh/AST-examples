@@ -19,6 +19,32 @@ def instrument_code(stringified_code):
     instrumented_code = astor.to_source(instrumented_tree)
     return instrumented_code
 
+class Colors:
+    RESET = "\033[0m"
+    RED = "\033[91m"
+    GREEN = "\033[92m"
+    YELLOW = "\033[93m"
+    BLUE = "\033[94m"
+    MAGENTA = "\033[95m"
+    CYAN = "\033[96m"
+
+def colorize(text: str, color: str) -> str:
+    return f"{color}{text}{Colors.RESET}"
+
+def get_node_color(node: Any) -> str:
+    if isinstance(node, ast.FunctionDef):
+        return Colors.BLUE
+    elif isinstance(node, ast.Call):
+        return Colors.RED
+    elif isinstance(node, ast.Name):
+        return Colors.YELLOW
+    elif isinstance(node, (ast.JoinedStr, ast.arguments, ast.Expr, ast.Assert, ast.Return)):
+        return Colors.MAGENTA
+    elif isinstance(node, ast.Call):
+        return Colors.CYAN
+    else:
+        return Colors.RESET
+
 
 def ast_to_tree(node: Any, level: int = 0, last: bool = True, prefix: str = "") -> str:
     tree = ""
@@ -26,15 +52,17 @@ def ast_to_tree(node: Any, level: int = 0, last: bool = True, prefix: str = "") 
     # Add the current node to the tree
     if level > 0:
         tree += prefix
-        tree += "└── " if last else "├── "
-    tree += type(node).__name__
+        tree += colorize("└── ", Colors.BLUE) if last else colorize("├── ",Colors.BLUE)
+
+    node_color = get_node_color(node)
+    tree += colorize(type(node).__name__, node_color)
 
     # Add attributes of the node
     attrs = []
     for attr in ["id", "name", "arg", "value"]:
         if hasattr(node, attr):
             value = getattr(node, attr)
-            attrs.append(f"{attr}={repr(value)}")
+            attrs.append(f"{attr}={colorize(repr(value), Colors.CYAN)}")
     if attrs:
         tree += f" ({', '.join(attrs)})"
     tree += "\n"
