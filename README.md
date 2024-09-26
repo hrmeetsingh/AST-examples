@@ -19,7 +19,8 @@ return a
 
 ![Abstract syntax tree](/images/AST_Tree.png)
 
-### Use case of Abstract Syntax Tree - Instrumentation (python example)
+### Use case 
+#### 1. Instrumentation (python example)
 
 ```python
 def gcd(a, b):
@@ -35,7 +36,7 @@ def gcd(a, b):
         __end_time__ - __start_time__))
 ```
 
-### Use Case - Code Coverage calculation using code spies
+#### 2. Code Coverage calculation using code spies
 Example file for python code with spies inserted in code to observe calls to calculate coverage - `ast-function-spies.py`
 
 Explanation -
