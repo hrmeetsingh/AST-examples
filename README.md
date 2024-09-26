@@ -34,3 +34,32 @@ def gcd(a, b):
     print(f'Function {0} took {1:.6f} seconds'.format(__name__, 
         __end_time__ - __start_time__))
 ```
+
+### Use Case - Code Coverage calculation using code spies
+Example file for python code with spies inserted in code to observe calls to calculate coverage - `ast-function-spies.py`
+
+Explanation -
+- The input function `greet` is called twice with different parameters
+- Code is parsed into an AST tree
+- Spy functions are inserted at code execution points
+- Instrumented code is executed
+- Spy functions are tracked for executions and a record is kept
+- Count of code execution is printed
+
+Sample output -
+```
+Execution analysis:
+-------------------
+Line | Hit  | Code
+-------------------
+   1 |      | 
+   2 |    2 | def greet(name):
+   3 |      |     if name.startswith('Dr.'):
+   4 |      |         print(f"Hello, Doctor {name[3:]}!")
+   5 |      |     else:
+   6 |      |         print(f"Hello, {name}!")
+   7 |      | 
+   8 |      | greet("Dr. Smith")
+   9 |    1 | greet("Alice")
+  10 |      |     
+```
