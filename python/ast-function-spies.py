@@ -54,7 +54,9 @@ def analyze_spy_hits(original_code: str, spy_hits: Dict[int, int]):
             spy_id = int(line.split('(')[1].split(')')[0])
             spy_to_line[spy_id] = i
 
-    print("Execution analysis:")
+    print("\nExecution analysis:")
+    print("-------------------")
+    print("Line | Hit  | Code")
     print("-------------------")
     for i, line in enumerate(original_lines):
         hit_count = sum(spy_hits.get(spy_id, 0) for spy_id, line_num in spy_to_line.items() if line_num == i)
@@ -85,5 +87,5 @@ greet("Alice")
     
     exec(instrumented_code)
     
-    print("\nExecution analysis:")
+    # print("\nExecution analysis:")
     analyze_spy_hits(original_code, spy_hits)
