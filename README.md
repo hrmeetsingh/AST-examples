@@ -64,3 +64,5 @@ Line | Hit  | Code
    9 |    1 | greet("Alice")
   10 |      |     
 ```
+
+### TODO: Add javascript sample for coverage code as well
